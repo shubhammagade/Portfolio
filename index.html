@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shubham Magade | SAP CPI & SAP ByDesign / C4C Technical Developer</title>
+<meta name="description" content="Portfolio of Shubham Magade, an SAP CPI and SAP ByDesign / C4C technical developer building SAP Integration Suite iFlows, bank integrations on S/4HANA Cloud, PI/PO migrations and SAP Business ByDesign extensions.">
+<meta name="author" content="Shubham Magade">
+<meta name="keywords" content="Shubham Magade, SAP CPI Developer, SAP ByDesign Technical Consultant, SAP C4C Technical, SAP Integration Suite, SAP BTP, SAP Business ByDesign, ABSL, iFlow, Groovy, S/4HANA Cloud, PI/PO migration">
+<meta property="og:title" content="Shubham Magade | SAP CPI & ByDesign / C4C Technical">
+<meta property="og:description" content="SAP Integration Suite iFlows and ByDesign extensions that keep payment files, bank confirmations and e-invoices moving.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F1F0E8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F0E8;--paper-2:#E8E6DB;--surface:#FAF9F4;--ink:#16181D;--muted:#5D5F66;--line:#D6D3C6;
+  --accent:#0B6E63;--accent-ink:#FFFFFF;--soft:#DCEAE5;--hot:#D9541E;--hot-soft:#F6E1D4;--danger:#B4473A;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121311;--paper-2:#1A1B18;--surface:#1D1E1B;--ink:#ECEAE0;--muted:#A3A39A;--line:#2F302C;
+  --accent:#4CC6B3;--accent-ink:#06231F;--soft:#173430;--hot:#F07A45;--hot-soft:#3A2418;--danger:#E07B6E;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121311;--paper-2:#1A1B18;--surface:#1D1E1B;--ink:#ECEAE0;--muted:#A3A39A;--line:#2F302C;
+  --accent:#4CC6B3;--accent-ink:#06231F;--soft:#173430;--hot:#F07A45;--hot-soft:#3A2418;--danger:#E07B6E;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:inherit}
+img,svg,canvas{max-width:100%}
+p{margin:0}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.025em;line-height:1.05;font-weight:700}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--hot);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--ink);color:var(--paper);padding:8px 12px;border-radius:6px;z-index:60}
+.skip:focus{left:12px}
+.wrap{width:min(1200px,100% - 48px);margin-inline:auto}
+.mono{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.star{color:var(--hot)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand .mono-mark{width:38px;height:38px;border-radius:10px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:700 14px var(--display);letter-spacing:.02em}
+.brand b{display:block;font:700 16px/1.1 var(--display)}
+.brand small{font-size:12px;color:var(--muted)}
+.nav{display:flex;gap:4px}
+.nav a{font-size:14px;font-weight:500;text-decoration:none;color:var(--muted);padding:8px 11px;border-radius:8px}
+.nav a:hover{color:var(--ink);background:var(--paper-2)}
+.tools{display:flex;gap:8px;align-items:center}
+.kbtn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:10px;font:500 13px var(--body);cursor:pointer}
+.kbtn kbd{font:600 11px var(--mono);padding:2px 6px;border:1px solid var(--line);border-radius:5px;color:var(--ink)}
+.ibtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:18px;height:18px}
+.menu{display:none}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 15px/1 var(--body);padding:15px 22px;border-radius:999px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.btn svg{width:16px;height:16px}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:var(--accent);color:var(--accent-ink)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding:26px 0 0}
+.strip{display:flex;justify-content:space-between;gap:16px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center;padding:52px 0 40px}
+.byline{color:var(--muted);margin-bottom:24px}
+.hero h1{font-size:clamp(44px,6.4vw,92px);font-weight:800;letter-spacing:-.045em;line-height:.98}
+.hero h1 em.s{display:block;color:var(--accent);font-size:1.04em;margin-top:.06em}
+.lead{margin-top:28px;font-size:19px;line-height:1.6;color:var(--muted);max-width:52ch}
+.lead strong{color:var(--ink);font-weight:600}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.avail{margin-top:26px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.avail i{width:8px;height:8px;border-radius:50%;background:#2DB37F;box-shadow:0 0 0 4px color-mix(in srgb,#2DB37F 22%,transparent);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,#2DB37F 0%,transparent)}}
+.fig{position:relative;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 50% 45%,var(--surface),var(--paper-2) 75%);aspect-ratio:1/1;overflow:hidden}
+.fig canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.fig canvas:active{cursor:grabbing}
+.fig .fcap{position:absolute;left:18px;right:18px;display:flex;justify-content:space-between;gap:10px;color:var(--muted);pointer-events:none}
+.fig .fcap.t{top:16px}.fig .fcap.b{bottom:16px}
+.fig .fcap b{color:var(--ink);font-weight:600}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);flex-wrap:wrap}
+.hero-foot a{text-decoration:none}
+.hero-foot a:hover{color:var(--hot)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--ink);color:var(--paper);overflow:hidden}
+.marquee .lab{color:color-mix(in srgb,var(--paper) 60%,transparent);padding:14px 0 0}
+.track{display:flex;width:max-content;animation:slide 38s linear infinite;padding:10px 0 16px}
+.track span{font:700 clamp(26px,3.4vw,44px)/1 var(--display);letter-spacing:-.02em;white-space:nowrap;padding-right:28px;display:flex;align-items:center;gap:28px}
+.track span::after{content:"✳";color:var(--hot);font-size:.7em}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marquee:hover .track{animation-play-state:paused}
+
+/* sections */
+.sec{padding:110px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:56px}
+.sec-num{font:700 15px var(--mono);color:var(--hot);padding-top:6px}
+.sec-kick{color:var(--muted);margin-bottom:12px}
+.sec-head h2{font-size:clamp(36px,5vw,68px);letter-spacing:-.04em}
+.sec-head p.sub{margin-top:18px;color:var(--muted);font-size:17px;max-width:56ch}
+
+/* about */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.portrait{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:var(--ink);color:var(--paper)}
+.portrait img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.portrait figcaption{z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.portrait .mono-big{position:absolute;inset:0;display:grid;place-items:center;font:800 clamp(80px,12vw,150px)/1 var(--display);letter-spacing:-.05em}
+.portrait .mono-big em{font-family:var(--serif);font-weight:400;color:var(--hot)}
+.portrait figcaption{position:absolute;left:16px;bottom:14px;color:color-mix(in srgb,var(--paper) 75%,transparent)}
+.about-copy p{font-size:18px;color:var(--muted);margin-bottom:18px;max-width:62ch}
+.about-copy p.big{font:500 clamp(22px,2.3vw,28px)/1.4 var(--display);color:var(--ink);letter-spacing:-.015em}
+.facts{margin-top:30px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
+.facts div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.facts div:nth-child(odd){padding-right:20px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;font-weight:600}
+
+/* experience */
+.tl{display:grid;gap:0;border-top:1px solid var(--line)}
+.tl-item{display:grid;grid-template-columns:120px 220px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid var(--line)}
+.tl-n{font:700 15px var(--mono);color:var(--muted)}
+.tl-when{color:var(--muted);font-size:15px}
+.tl-when .tag{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+.tl-when .tag.now{background:var(--hot);border-color:var(--hot);color:#fff}
+.tl-body h3{font-size:clamp(24px,2.6vw,34px)}
+.tl-body .org{color:var(--muted);margin:6px 0 16px}
+.tl-body ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--muted);max-width:70ch}
+
+/* work */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{font:500 14px var(--body);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip small{margin-left:6px;font:600 11px var(--mono);opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:28px;min-height:330px;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,transform .2s}
+.card[hidden]{display:none}
+.card:hover{border-color:var(--ink);transform:translateY(-3px)}
+.card:hover .go{background:var(--hot);border-color:var(--hot);color:#fff;transform:rotate(-45deg)}
+.card-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.card-top .st{padding:4px 10px;border-radius:999px;background:var(--hot-soft);color:var(--hot);letter-spacing:.08em}
+.card-top .st.done{background:var(--soft);color:var(--accent)}
+.card .cat{color:var(--muted);margin-top:34px}
+.card h3{font-size:clamp(26px,2.6vw,34px);margin-top:10px}
+.card p{color:var(--muted);margin-top:12px;max-width:52ch}
+.card .route{margin-top:18px;font:500 12px/1.6 var(--mono);color:var(--ink)}
+.card .route i{color:var(--hot);font-style:normal;padding:0 6px}
+.card-foot{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.go{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.2s}
+.go svg{width:18px;height:18px}
+.note{margin-top:22px;font-size:14px;color:var(--muted)}
+
+/* capabilities */
+.caps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.cap{padding:28px 24px 30px 0;border-right:1px solid var(--line)}
+.cap+.cap{padding-left:24px}
+.cap:last-child{border-right:0}
+.cap .n{font:700 13px var(--mono);color:var(--hot)}
+.cap h3{font-size:24px;margin:16px 0 10px}
+.cap p{color:var(--muted);font-size:15px}
+.cap ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:7px}
+.cap li{font-size:14px;display:flex;gap:10px}
+.cap li::before{content:"✳";color:var(--hot);font-size:11px;padding-top:3px}
+.monitor{margin-top:70px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface)}
+.mon-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.mon-bar .mono{color:var(--muted)}
+.mon-bar .mono b{color:var(--ink);font-weight:600}
+.replay{font:500 13px var(--body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.replay:hover{border-color:var(--ink)}
+.flow-scroll{overflow-x:auto;background-color:var(--paper-2);background-image:radial-gradient(color-mix(in srgb,var(--ink) 14%,transparent) 1px,transparent 1px);background-size:18px 18px}
+.flow-scroll svg{display:block;min-width:720px;width:100%;height:auto}
+.flow-scroll text{font-family:var(--mono);font-size:12px;fill:var(--ink)}
+.flow-scroll .sub{font-family:var(--body);font-size:11px;fill:var(--muted)}
+.node rect,.node polygon,.node circle{fill:var(--surface);stroke:var(--line);stroke-width:1.5;transition:stroke .25s,fill .25s}
+.node.hit rect,.node.hit polygon,.node.hit circle{stroke:var(--accent);fill:var(--soft)}
+.pipe{stroke:var(--muted);stroke-width:1.5}
+.pipe-done{stroke:var(--accent);stroke-width:2.5}
+.pool{fill:none;stroke:var(--muted);stroke-dasharray:5 5}
+.exc rect{fill:none;stroke:var(--danger);stroke-dasharray:4 4}
+.exc text{fill:var(--danger)}
+#token{fill:var(--hot)}
+.log{display:grid;grid-template-columns:auto 1fr auto;gap:4px 18px;padding:14px 20px;border-top:1px solid var(--line);align-items:center;font-size:14px}
+.log time{font:500 12px var(--mono);color:var(--muted)}
+.pill{justify-self:start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--hot-soft);color:var(--hot)}
+.pill.ok{background:var(--soft);color:var(--accent)}
+.fig-cap{margin-top:12px;color:var(--muted)}
+
+/* certifications row */
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:70px}
+.cred{border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--surface)}
+.cred .mono{color:var(--muted)}
+.cred h3{font-size:20px;margin:10px 0 6px}
+.cred p{color:var(--muted);font-size:15px}
+
+/* contact */
+.contact{padding:120px 0 100px}
+.contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px}
+.contact h2{font-size:clamp(44px,6.4vw,92px);font-weight:800;letter-spacing:-.045em;line-height:.98}
+.contact h2 em.s{color:var(--accent)}
+.contact .lead{font-size:18px}
+.links{margin-top:36px;border-top:1px solid var(--line)}
+.links a,.links div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.links .mono{color:var(--muted)}
+.links b{font:600 clamp(17px,1.8vw,21px) var(--display);letter-spacing:-.01em;word-break:break-all;text-align:right}
+.links a:hover b{color:var(--hot)}
+.form{border:1px solid var(--line);border-radius:22px;background:var(--surface);padding:30px}
+.form .mono{color:var(--hot)}
+.form h3{font-size:28px;margin:10px 0 22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label{font-size:13px;font-weight:600}
+.field input,.field textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.form small{display:block;color:var(--muted);font-size:13px;margin:4px 0 18px}
+.err{color:var(--danger);font-size:13px;min-height:1em;margin-bottom:8px}
+
+footer{border-top:1px solid var(--line);padding:30px 0}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+footer .brand small{color:var(--muted)}
+footer nav{display:flex;gap:16px}
+footer nav a{text-decoration:none}
+footer nav a:hover{color:var(--hot)}
+
+/* dialogs */
+dialog{border:0;padding:0;background:transparent;color:var(--ink);max-width:min(820px,calc(100% - 28px));width:100%}
+dialog::backdrop{background:color-mix(in srgb,#000 50%,transparent);backdrop-filter:blur(3px)}
+.dlg{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:34px;max-height:86vh;overflow:auto;position:relative}
+.dlg .x{position:absolute;top:16px;right:16px}
+.dlg .mono{color:var(--hot)}
+.dlg h2{font-size:clamp(28px,3.6vw,42px);margin:10px 50px 8px 0}
+.dlg .who{color:var(--muted)}
+.dlg .sum{font-size:18px;margin:22px 0}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:18px;border-radius:14px;background-color:var(--paper-2);background-image:radial-gradient(color-mix(in srgb,var(--ink) 12%,transparent) 1px,transparent 1px);background-size:14px 14px}
+.chain span{font:500 12px/1.3 var(--mono);background:var(--surface);border:1px solid var(--line);padding:8px 11px;border-radius:8px}
+.chain span:first-child,.chain span:last-child{border-color:var(--accent)}
+.chain i{font-style:normal;color:var(--hot)}
+.dcols{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;margin-top:26px}
+.dcols h4{font:600 14px var(--body);margin:0 0 10px}
+.dcols ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:7px}
+.pal{max-width:560px;align-self:start;margin-top:12vh}
+.pal .dlg{padding:0}
+.pal input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:500 17px var(--body);padding:20px 22px;outline:none}
+.pal ul{list-style:none;margin:0;padding:8px;max-height:50vh;overflow:auto}
+.pal li button{width:100%;text-align:left;display:flex;justify-content:space-between;gap:10px;font:500 15px var(--body);color:var(--ink);background:none;border:0;border-radius:10px;padding:12px 14px;cursor:pointer}
+.pal li button small{color:var(--muted);font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.pal li button[aria-selected="true"]{background:var(--paper-2)}
+.pal .hint{padding:10px 22px 14px;border-top:1px solid var(--line);color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:80}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:1040px){
+  .hero-grid{grid-template-columns:1fr}
+  .fig{max-width:560px;width:100%;justify-self:center}
+  .caps{grid-template-columns:1fr 1fr}
+  .cap:nth-child(2){border-right:0}
+  .cap:nth-child(3){padding-left:0}
+  .cap:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .contact-grid,.about{grid-template-columns:1fr}
+  .portrait{max-width:380px}
+  .tl-item{grid-template-columns:70px 1fr}
+  .tl-body{grid-column:2}
+}
+@media (max-width:760px){
+  .wrap{width:min(100% - 32px,680px)}
+  .nav{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;padding:10px 16px 18px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .nav a{padding:12px}
+  .menu{display:grid}
+  .kbtn span,.kbtn kbd{display:none}
+  .kbtn{width:38px;padding:0;justify-content:center}
+  .brand small{display:none}
+  .sec{padding:76px 0}
+  .sec-head{grid-template-columns:1fr;gap:6px;margin-bottom:36px}
+  .grid,.creds{grid-template-columns:1fr}
+  .card{min-height:0;padding:22px}
+  .card .cat{margin-top:22px}
+  .caps{grid-template-columns:1fr}
+  .cap,.cap+.cap{padding:24px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .facts{grid-template-columns:1fr}
+  .facts div:nth-child(odd){padding-right:0}
+  .tl-item{grid-template-columns:1fr;gap:10px}
+  .tl-body{grid-column:auto}
+  .row,.dcols{grid-template-columns:1fr}
+  .dlg{padding:26px 20px}
+  .log{grid-template-columns:auto 1fr}
+  .log time{grid-column:1/-1}
+  .lead{font-size:17px}
+  .strip span:nth-child(2){display:none}
+  .fig .fcap.t span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mono-mark">SM</span><span><b>Shubham Magade</b><small>SAP CPI · ByDesign · C4C</small></span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="kbtn" id="palBtn" aria-label="Open quick actions"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd id="kbdHint">Ctrl K</kbd></button>
+      <button class="ibtn" id="themeBtn" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="ibtn menu" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+<section class="hero">
+  <div class="wrap">
+    <div class="strip mono"><span>Clean data. Connected systems.</span><span>SAP Integration Suite <span class="star">✳</span> SAP ByDesign</span><span>Pune, India <span class="star">✳</span></span></div>
+    <div class="hero-grid">
+      <div>
+        <p class="byline mono">— Shubham Magade / SAP CPI & ByDesign Developer</p>
+        <h1>Every business runs on data in motion. <em class="s">I keep it moving.</em></h1>
+        <p class="lead">I build <strong>SAP Integration Suite iFlows</strong> and <strong>SAP Business ByDesign extensions</strong> that connect SAP to banks, tax portals and partner systems, with the mapping, security and exception handling that hold up in production.</p>
+        <div class="actions">
+          <a class="btn btn-dark" href="#work">Explore my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <!--CV--><a class="btn btn-line" href="Shubham_CV.pdf" download>Get my resume</a><!--/CV-->
+        </div>
+        <p class="avail"><i aria-hidden="true"></i>Open to SAP CPI and SAP ByDesign / C4C technical roles.</p>
+      </div>
+      <figure class="fig" style="margin:0">
+        <div class="fcap t mono"><span><b>Fig. 01</b> / The integration hub</span><span id="figMsgs">Live</span></div>
+        <canvas id="hub" tabindex="0" aria-label="Interactive 3D map of the systems I connect. SAP Cloud Integration sits at the centre, linked to S/4HANA Cloud, SAP ByDesign, SAP PI/PO, a bank’s SFTP server and bank APIs. CPI also links SAP ByDesign to the Spanish tax agency AEAT, while ByDesign connects directly to a government e-invoicing portal and PDF forms. Drag or use arrow keys to rotate."></canvas>
+        <div class="fcap b mono"><span>Drag to explore <span class="star">✳</span> Arrows to rotate</span><span>Live messages</span></div>
+      </figure>
+    </div>
+    <div class="hero-foot mono"><a href="#work">↓ &nbsp;Scroll to discover</a><span>Built to integrate. Built to last.</span><span>Portfolio 2026</span></div>
+  </div>
+</section>
+
+<div class="marquee" aria-label="Tools behind the work">
+  <div class="wrap mono lab">The tools behind the work</div>
+  <div class="track" aria-hidden="true" id="track"></div>
+</div>
+
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><div><p class="sec-kick mono">The person behind the iFlows</p><h2>Curious about systems. <em class="s">Careful with data.</em></h2></div></div>
+    <div class="about">
+      <figure class="portrait" style="margin:0">
+        <img src="shubham.jpg" alt="Shubham Magade" width="480" height="600" loading="lazy" onerror="this.remove()">
+        <div class="mono-big" aria-hidden="true"><span>S<em>m</em></span></div>
+        <figcaption class="mono">Shubham Magade / Pune, IN</figcaption>
+      </figure>
+      <div class="about-copy">
+        <p class="big">My work sits between SAP and everything it has to talk to: banks that expect a payment file on time, tax portals that reject a malformed invoice, and legacy PI/PO interfaces that need a new home.</p>
+        <p>At NoblQ I design and build CPI iFlows using REST, SOAP, OData, XML and JSON, and I extend SAP Business ByDesign with the SDK, ABSL and custom business objects. I care about the unglamorous parts: exception subprocesses, duplicate checks, certificates and message monitoring, because they decide whether an integration survives its first month.</p>
+        <dl class="facts">
+          <div><dt class="mono">Current role</dt><dd>SAP Developer at NoblQ</dd></div>
+          <div><dt class="mono">Experience</dt><dd>2 years, SAP production</dd></div>
+          <div><dt class="mono">Primary stack</dt><dd>SAP CPI · Groovy · XSLT</dd></div>
+          <div><dt class="mono">Platforms</dt><dd>S/4HANA Cloud · ByDesign · BTP</dd></div>
+          <div><dt class="mono">Education</dt><dd>MCA, CGPA 8.0</dd></div>
+          <div><dt class="mono">Target roles</dt><dd>SAP CPI Developer · SAP ByDesign / C4C Technical</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><div><p class="sec-kick mono">Experience</p><h2>Learning. Building. <em class="s">Owning the flow.</em></h2><p class="sub">From a computer applications degree to production integrations for banks and manufacturers.</p></div></div>
+    <div class="tl">
+      <article class="tl-item">
+        <span class="tl-n">01</span>
+        <div class="tl-when">Nov 2024 – Present<br><span class="tag now mono">Current</span></div>
+        <div class="tl-body">
+          <h3>SAP Developer, SAP CPI & ByDesign</h3>
+          <p class="org">NoblQ Pvt Ltd · Salem, India</p>
+          <ul>
+            <li>Design and develop SAP ByDesign extensions and SAP CPI integration solutions for business process and data integration needs.</li>
+            <li>Build CPI iFlows using REST, SOAP, OData, XML and JSON, including routing, transformations and exception handling.</li>
+            <li>Develop ByDesign extensions using the SDK, ABSL and custom business objects.</li>
+            <li>Deliver integrations for banking, manufacturing and pharmaceutical clients, working alongside functional and technical teams.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-n">02</span>
+        <div class="tl-when">2022 – 2024<br><span class="tag mono">Foundation</span></div>
+        <div class="tl-body">
+          <h3>Master of Computer Applications</h3>
+          <p class="org">Savitribai Phule Pune University · CGPA 8.0</p>
+        </div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-n">03</span>
+        <div class="tl-when">2019 – 2021<br><span class="tag mono">Foundation</span></div>
+        <div class="tl-body">
+          <h3>Bachelor of Computer Applications</h3>
+          <p class="org">North Maharashtra University · CGPA 9.5</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><div><p class="sec-kick mono">Selected work</p><h2>Real interfaces. <em class="s">Reliable delivery.</em></h2><p class="sub">Integrations and extensions I’ve built, migrated and supported. Open any project for the flow, my part in it and the tools used.</p></div></div>
+    <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <p class="note">Descriptions cover my own contribution and leave out client data, credentials and payloads.</p>
+  </div>
+</section>
+
+<section class="sec" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><div><p class="sec-kick mono">Capabilities</p><h2>From the first adapter <em class="s">to go-live.</em></h2></div></div>
+    <div class="caps">
+      <div class="cap"><span class="n">01</span><h3>SAP Integration Suite</h3><p>End-to-end iFlows: adapters, graphical mapping, routing and monitoring.</p><ul><li>iFlow development</li><li>Message & value mapping</li><li>Content Modifier, Splitter, Gather</li><li>Router conditions</li><li>Message monitoring & trace</li><li>API Management</li></ul></div>
+      <div class="cap"><span class="n">02</span><h3>SAP ByDesign / C4C</h3><p>Extending ByDesign with the Cloud Applications Studio.</p><ul><li>ABSL</li><li>Cloud Applications Studio (SDK)</li><li>Custom business objects</li><li>UI scripting</li><li>Mass Data Run (MDRO)</li><li>Object Value Select (OVS)</li></ul></div>
+      <div class="cap"><span class="n">03</span><h3>APIs & protocols</h3><p>The formats and channels SAP uses to talk to the world.</p><ul><li>REST, SOAP, OData</li><li>IDoc, WSDL</li><li>HTTPS, SFTP</li><li>XML, JSON</li><li>Groovy, XSLT</li><li>Postman, SoapUI</li></ul></div>
+      <div class="cap"><span class="n">04</span><h3>Security & reliability</h3><p>What keeps bank-facing interfaces safe and recoverable.</p><ul><li>PGP & hybrid encryption</li><li>Certificate management</li><li>SFTP authentication</li><li>Exception subprocesses</li><li>Duplicate-payment checks</li><li>Post-go-live monitoring</li></ul></div>
+    </div>
+
+    <figure class="monitor" style="margin-inline:0">
+      <div class="mon-bar"><span class="mono"><b>Fig. 02</b> / A message in flight: S/4HANA Cloud to bank SFTP</span><button class="replay" id="replay">Send another message</button></div>
+      <div class="flow-scroll" id="flowScroll">
+        <svg id="flow" viewBox="0 0 980 300" role="img" aria-label="An integration flow: SAP S/4HANA Cloud sends a payment file through a content modifier, message mapping and router to the bank’s SFTP server, with an exception subprocess for errors.">
+          <rect class="pool" x="170" y="34" width="640" height="236" rx="10"/>
+          <text class="sub" x="186" y="56">Integration process</text>
+          <line class="pipe" x1="140" y1="130" x2="850" y2="130"/>
+          <line class="pipe-done" id="done" x1="140" y1="130" x2="140" y2="130"/>
+          <g class="node" data-x="80"><rect x="20" y="96" width="120" height="68" rx="10"/><text x="80" y="126" text-anchor="middle">S/4HANA</text><text class="sub" x="80" y="146" text-anchor="middle">Sender</text></g>
+          <g class="node" data-x="220"><circle cx="220" cy="130" r="14"/></g>
+          <g class="node" data-x="330"><rect x="270" y="104" width="120" height="52" rx="8"/><text x="330" y="135" text-anchor="middle">Content Modifier</text></g>
+          <g class="node" data-x="490"><rect x="430" y="104" width="120" height="52" rx="8"/><text x="490" y="135" text-anchor="middle">Message Mapping</text></g>
+          <g class="node" data-x="625"><polygon points="625,100 655,130 625,160 595,130"/><text class="sub" x="625" y="182" text-anchor="middle">Router</text></g>
+          <g class="node" data-x="760"><circle cx="760" cy="130" r="14" style="stroke-width:3"/></g>
+          <g class="node" data-x="850"><rect x="850" y="96" width="120" height="68" rx="10"/><text x="910" y="126" text-anchor="middle">Bank SFTP</text><text class="sub" x="910" y="146" text-anchor="middle">Receiver</text></g>
+          <g class="exc"><rect x="330" y="204" width="300" height="46" rx="8"/><text x="480" y="232" text-anchor="middle">Exception subprocess: log and alert</text></g>
+          <circle id="token" cx="80" cy="130" r="8"/>
+        </svg>
+      </div>
+      <div class="log" aria-live="polite"><time id="logTime">00:00.000</time><span id="logText">Payment medium file picked up from S/4HANA Cloud</span><span class="pill" id="logPill">Processing</span></div>
+    </figure>
+    <p class="fig-cap mono">Modelled on a host-to-host bank payment integration I built.</p>
+
+    <div class="creds">
+      <div class="cred"><span class="mono">Certification</span><h3>SAP Cloud Platform Integration (CPI)</h3><p>Udemy</p></div>
+      <div class="cred"><span class="mono">Certification</span><h3>SAP Cloud for Customer (C4C)</h3><p>Technical training, Udemy</p></div>
+      <div class="cred"><span class="mono">Languages</span><h3>English, Hindi, Marathi</h3><p>Spoken and written</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="mono" style="color:var(--muted);margin-bottom:18px">Available for CPI and ByDesign / C4C teams</p>
+      <h2>Have a role in mind? <em class="s">Let’s talk.</em></h2>
+      <p class="lead">Open to two kinds of roles: SAP CPI / Integration Developer, and SAP ByDesign / C4C Technical Consultant. I’m happy to join SAP partners, product companies or enterprise IT teams.</p>
+      <div class="links">
+        <a href="mailto:magadeshubham95@gmail.com"><span class="mono">Email</span><b>magadeshubham95@gmail.com</b></a>
+        <a href="https://www.linkedin.com/in/shubham-magade" target="_blank" rel="noopener"><span class="mono">LinkedIn</span><b>/in/shubham-magade</b></a>
+        <div><span class="mono">Location</span><b>Pune, India</b></div>
+      </div>
+      <div class="actions"><!--CV--><a class="btn btn-dark" href="Shubham_CV.pdf" download>Download resume</a><!--/CV--><button class="btn btn-line" id="copyMail">Copy email</button></div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <span class="mono">Direct channel</span>
+      <h3>Tell me about the opportunity.</h3>
+      <div class="row">
+        <div class="field"><label for="fName">Name</label><input id="fName" autocomplete="name" required></div>
+        <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="field"><label for="fSub">Subject</label><input id="fSub" placeholder="SAP CPI or ByDesign / C4C technical role"></div>
+      <div class="field"><label for="fMsg">Message</label><textarea id="fMsg" required></textarea></div>
+      <small>This opens your email app with the message ready to send.</small>
+      <p class="err" id="fErr" role="alert"></p>
+      <button class="btn btn-dark" type="submit">Write email</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mono-mark">SM</span><span><b>Shubham Magade</b><small>SAP CPI · ByDesign · C4C</small></span></a>
+    <span>© <span id="year">2026</span> Shubham Magade. Built with care.</span>
+    <nav aria-label="Social"><a href="https://www.linkedin.com/in/shubham-magade" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:magadeshubham95@gmail.com">Email</a><a href="#top">Back to top</a></nav>
+  </div>
+</footer>
+
+<dialog id="caseDlg" aria-labelledby="cTitle">
+  <div class="dlg">
+    <button class="ibtn x" id="cClose" aria-label="Close case study"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <span class="mono" id="cKick"></span>
+    <h2 id="cTitle"></h2>
+    <p class="who" id="cWho"></p>
+    <p class="sum" id="cSum"></p>
+    <div class="chain" id="cChain"></div>
+    <div class="dcols"><div><h4>What I did</h4><ul id="cDid"></ul></div><div><h4>Tools</h4><div class="pills" id="cTools"></div></div></div>
+  </div>
+</dialog>
+
+<dialog id="palDlg" class="pal" aria-label="Quick actions">
+  <div class="dlg">
+    <input id="palIn" placeholder="Jump to a section or project…" aria-label="Search sections, projects and actions" autocomplete="off" role="combobox" aria-controls="palList" aria-expanded="true">
+    <ul id="palList" role="listbox"></ul>
+    <div class="hint mono">↑ ↓ to move <span class="star">✳</span> Enter to open <span class="star">✳</span> Esc to close</div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  var $ = function(s){return document.querySelector(s)};
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  var toastEl = $("#toast"), tt;
+  function say(m){toastEl.textContent=m;toastEl.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove("show")},2000)}
+
+  /* ===== Marquee ===== */
+  var tools = ["SAP Integration Suite","Groovy","S/4HANA Cloud","SAP ByDesign","ABSL","OData","XSLT","SFTP","PGP","REST & SOAP","PI/PO migration"];
+  var once = tools.map(function(t){return "<span>"+t+"</span>"}).join("");
+  $("#track").innerHTML = once + once;
+
+  /* ===== Projects ===== */
+  var P = [
+    {id:"migration",cats:["cpi"],status:"",when:"Aug 2026 – Present",kick:"Platform migration",
+     title:"PI/PO to Integration Suite migration",client:"Manufacturing client, Middle East",
+     summary:"Moving existing SAP PI/PO interfaces onto SAP Integration Suite, rebuilding each flow in CPI and getting it working in testing.",
+     flow:["SAP PI/PO interface","Dependency analysis","Rebuilt CPI iFlow","Adapter configuration","SAP Integration Suite"],
+     did:["Analysed existing PI/PO interfaces and their dependencies, then migrated the integration flows to Integration Suite.","Recreated message mappings, routing logic and communication configurations in CPI iFlows.","Configured sender and receiver adapters.","Resolved mapping, connectivity and message-processing issues during testing."],
+     tools:["SAP PI/PO","SAP Integration Suite","Message mapping","Routing","Adapters"]},
+    {id:"cub",cats:["cpi","banking"],status:"",when:"Jul 2026 – Present",kick:"Bank connectivity",
+     title:"Host-to-host bank payment files",client:"Banking client, India",
+     summary:"An iFlow that collects payment medium files from SAP S/4HANA Cloud and delivers them to the bank over secure SFTP.",
+     flow:["S/4HANA Cloud payment medium","CPI iFlow","File processing","Exception handling","Bank SFTP"],
+     did:["Developed the iFlow that retrieves payment medium files from SAP S/4HANA Cloud and transfers them to the bank.","Configured SFTP authentication and secure transmission.","Implemented file processing, message handling and exception handling.","Supported troubleshooting to keep payment-file delivery reliable."],
+     tools:["SAP Integration Suite","S/4HANA Cloud","SFTP","Exception subprocess"]},
+    {id:"icici",cats:["cpi","banking"],status:"",when:"Jul 2026 – Present",kick:"Banking APIs",
+     title:"Bank payments & accounting APIs",client:"Banking client, India",
+     summary:"Integrations between a bank and SAP S/4HANA Cloud for virtual account validation, payment confirmations and journal entry creation.",
+     flow:["Bank API","REST call","Validate and transform","Duplicate check","OData service","S/4HANA journal entry"],
+     did:["Worked on virtual account validation, payment confirmation processing and journal entry creation integrations.","Designed transformation and validation logic, including duplicate-payment verification.","Configured REST APIs, OData services, hybrid encryption, PGP security and certificate management.","Supported testing and post-go-live monitoring."],
+     tools:["SAP Integration Suite","S/4HANA Cloud","REST","OData","PGP","Hybrid encryption","Certificates"]},
+    {id:"fne",cats:["byd","tax"],status:"Delivered",when:"SAP ByDesign",kick:"E-invoicing",
+     title:"FNE e-invoicing integration",client:"Government e-invoicing portal",
+     summary:"Submitting e-invoices from SAP ByDesign to a government portal and storing every response against the invoice. Delivered end to end.",
+     flow:["ByD customer invoice","Invoicing Handler BO","Validation","OData-based script","Government portal","Response stored in BO"],
+     did:["Built a custom Customer Invoicing Handler business object with PID tracking.","Wrote OData-based scripts to submit e-invoices to the government portal and store the responses back in the BO.","Added custom fields and validation logic to prevent submission errors.","Delivered the solution end to end."],
+     tools:["SAP ByDesign SDK","ABSL","Custom business object","OData"]},
+    {id:"dipharma",cats:["byd"],status:"Delivered",when:"SAP ByDesign",kick:"Document automation",
+     title:"Automated production documents",client:"Pharmaceutical manufacturer",
+     summary:"Automatic “Attachment 5” production documents in ByDesign, plus a bulk upload of extension-field data for more than 750 products.",
+     flow:["Production order","Printing Center","Extension fields","Custom print form","PDF document"],
+     did:["Developed a custom solution to automate “Attachment 5” production documents.","Built it on the Production Order Printing Center with custom print forms, extension fields and PDF generation.","Enabled bulk upload of extension-field data for 750+ products to support large-scale master data migration."],
+     tools:["SAP ByDesign SDK","Custom print forms","Extension fields","PDF generation","Data migration"]},
+    {id:"sii",cats:["cpi","byd","tax"],status:"",when:"2026",kick:"Tax reporting",
+     title:"Spain SII reporting to AEAT",client:"Preproduction and sandbox",
+     summary:"Setting up outgoing SII reporting from SAP Business ByDesign through SAP Integration Suite to the Spanish tax agency’s preproduction environment.",
+     flow:["ByD outgoing invoice","VAT Return Run","CPI iFlow","SII connectivity","AEAT preproduction"],
+     did:["Worked on outgoing Spain SII connectivity and configuration through SAP CPI, from SAP Business ByDesign to the AEAT preproduction environment.","Created a manual invoice for testing.","Investigated the VAT Return Run process for outgoing invoice submission."],
+     tools:["SAP Integration Suite","SAP Business ByDesign","Spain SII","VAT Return Run"]}
+  ];
+  var F = [{k:"all",l:"All"},{k:"cpi",l:"Integration Suite"},{k:"byd",l:"SAP ByDesign"},{k:"banking",l:"Banking"},{k:"tax",l:"E-invoicing & tax"}];
+  var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  $("#grid").innerHTML = P.map(function(p,i){
+    var st = p.status ? '<span class="st mono'+(p.status==="Delivered"?" done":"")+'">'+p.status+'</span>' : "";
+    var route = p.flow[0]+'<i>→</i>'+p.flow[p.flow.length-1];
+    return '<button class="card" data-id="'+p.id+'" data-cats="'+p.cats.join(" ")+'" aria-haspopup="dialog">'+
+      '<span class="card-top"><span class="mono">'+String(i+1).padStart(2,"0")+' / '+esc(p.when)+'</span>'+st+'</span>'+
+      '<span class="cat mono">'+esc(p.kick)+' / '+esc(p.client)+'</span>'+
+      '<h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+
+      '<span class="route">'+esc(p.flow[0])+'<i>→</i>'+esc(p.flow[p.flow.length-1])+'</span>'+
+      '<span class="card-foot"><span class="pills">'+p.tools.slice(0,3).map(function(t){return "<span>"+esc(t)+"</span>"}).join("")+'</span><span class="go" aria-hidden="true">'+arrow+'</span></span>'+
+    '</button>';
+  }).join("");
+  $("#filters").innerHTML = F.map(function(f,i){
+    var n = f.k==="all"?P.length:P.filter(function(p){return p.cats.indexOf(f.k)>-1}).length;
+    return '<button class="chip" data-f="'+f.k+'" aria-pressed="'+(i===0)+'">'+f.l+'<small>'+n+'</small></button>';
+  }).join("");
+  $("#filters").addEventListener("click",function(e){
+    var b=e.target.closest(".chip"); if(!b) return;
+    document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",String(c===b))});
+    document.querySelectorAll(".card").forEach(function(c){c.hidden = b.dataset.f!=="all" && c.dataset.cats.split(" ").indexOf(b.dataset.f)<0});
+  });
+
+  var dlg = $("#caseDlg"), lastFocus=null;
+  function openCase(id){
+    var p = P.filter(function(x){return x.id===id})[0]; if(!p) return;
+    $("#cKick").textContent = p.kick+" / "+p.when;
+    $("#cTitle").textContent = p.title;
+    $("#cWho").textContent = p.client;
+    $("#cSum").textContent = p.summary;
+    $("#cChain").innerHTML = p.flow.map(function(s){return "<span>"+esc(s)+"</span>"}).join('<i aria-hidden="true">→</i>');
+    $("#cChain").setAttribute("aria-label","Flow: "+p.flow.join(", then "));
+    $("#cDid").innerHTML = p.did.map(function(s){return "<li>"+esc(s)+"</li>"}).join("");
+    $("#cTools").innerHTML = p.tools.map(function(s){return "<span>"+esc(s)+"</span>"}).join("");
+    lastFocus = document.activeElement;
+    dlg.showModal();
+  }
+  $("#grid").addEventListener("click",function(e){var c=e.target.closest(".card"); if(c) openCase(c.dataset.id)});
+  $("#cClose").addEventListener("click",function(){dlg.close()});
+  dlg.addEventListener("click",function(e){if(e.target===dlg) dlg.close()});
+  dlg.addEventListener("close",function(){if(lastFocus) lastFocus.focus()});
+
+  /* ===== 3D integration hub ===== */
+  var cv = $("#hub"), ctx = cv.getContext("2d");
+  var hubNodes = [
+    {n:"SAP Cloud Integration",x:0,y:0,z:0,core:1},
+    {n:"S/4HANA Cloud",x:-1,y:-.35,z:.25},
+    {n:"SAP ByDesign",x:.95,y:-.5,z:-.2},
+    {n:"SAP PI/PO",x:-.3,y:-1,z:-.55},
+    {n:"Bank SFTP",x:-.85,y:.7,z:-.4},
+    {n:"Bank APIs",x:.15,y:.95,z:.55},
+    {n:"E-invoice portal",x:1,y:.45,z:.5},
+    {n:"AEAT (SII)",x:.55,y:-.15,z:-1},
+    {n:"PDF forms",x:-.4,y:.15,z:1}
+  ];
+  var edges = [[1,0],[2,0],[3,0],[0,4],[0,5],[2,6],[0,7],[2,8],[1,5]];
+  var routes = [[1,0,4],[5,0,1],[3,0,1],[2,6],[2,0,7],[2,8],[1,0,5]];
+  var shell = [], N=140;
+  for(var i=0;i<N;i++){var y=1-(i/(N-1))*2, r=Math.sqrt(1-y*y), th=i*2.39996; shell.push({x:Math.cos(th)*r*1.45,y:y*1.45,z:Math.sin(th)*r*1.45})}
+  var yaw=.5, pitch=-.25, vYaw=reduced?0:.0025, drag=null, msgs=[], count=0, W=0, H=0, dpr=1, colors={};
+  function readColors(){var s=getComputedStyle(document.documentElement);["ink","muted","line","accent","hot","surface","paper"].forEach(function(k){colors[k]=s.getPropertyValue("--"+k).trim()})}
+  function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  function proj(p){
+    var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+    var x=p.x*cy-p.z*sy, z=p.x*sy+p.z*cy, y=p.y*cp-z*sp; z=p.y*sp+z*cp;
+    var s=Math.min(W,H)*.25, f=3.2/(3.2+z);
+    return {x:W/2+x*s*f, y:H/2+y*s*f, z:z, f:f};
+  }
+  function spawn(){
+    var r=routes[Math.floor(Math.random()*routes.length)];
+    msgs.push({r:r,seg:0,t:0,sp:.012+Math.random()*.008});
+  }
+  function lerp(a,b,t){return {x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,z:a.z+(b.z-a.z)*t}}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    shell.forEach(function(p){var q=proj(p);ctx.globalAlpha=.12+.25*(1-(q.z+1.45)/2.9);ctx.fillStyle=colors.muted;ctx.beginPath();ctx.arc(q.x,q.y,1.3*q.f,0,7);ctx.fill()});
+    ctx.globalAlpha=1;
+    var pr = hubNodes.map(proj);
+    edges.forEach(function(e){var a=pr[e[0]],b=pr[e[1]];ctx.strokeStyle=colors.muted;ctx.globalAlpha=.35;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()});
+    ctx.globalAlpha=1;
+    msgs.forEach(function(m){var a=hubNodes[m.r[m.seg]],b=hubNodes[m.r[m.seg+1]],q=proj(lerp(a,b,m.t));ctx.fillStyle=colors.hot;ctx.beginPath();ctx.arc(q.x,q.y,4.2*q.f,0,7);ctx.fill();ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(q.x,q.y,9*q.f,0,7);ctx.fill();ctx.globalAlpha=1});
+    var order = pr.map(function(p,i){return i}).sort(function(a,b){return pr[b].z-pr[a].z});
+    order.forEach(function(i){
+      var q=pr[i], n=hubNodes[i];
+      if(n.core){
+        ctx.fillStyle=colors.ink;ctx.beginPath();ctx.arc(q.x,q.y,30*q.f,0,7);ctx.fill();
+        ctx.strokeStyle=colors.accent;ctx.lineWidth=2;ctx.beginPath();ctx.arc(q.x,q.y,38*q.f,0,7);ctx.stroke();
+        ctx.fillStyle=colors.paper;ctx.font="700 "+Math.round(13*q.f)+"px 'JetBrains Mono',monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("CPI",q.x,q.y);
+        ctx.fillStyle=colors.ink;ctx.font="600 "+Math.round(12*q.f)+"px 'IBM Plex Sans',sans-serif";ctx.fillText(n.n,q.x,q.y+52*q.f);
+      } else {
+        ctx.fillStyle=colors.surface;ctx.strokeStyle=colors.accent;ctx.lineWidth=2;ctx.beginPath();ctx.arc(q.x,q.y,7*q.f,0,7);ctx.fill();ctx.stroke();
+        ctx.globalAlpha=Math.max(.35,Math.min(1,1.15-q.z*.6));
+        ctx.font="600 "+Math.round(12.5*q.f)+"px 'IBM Plex Sans',sans-serif";ctx.textAlign=q.x<W/2?"right":"left";ctx.textBaseline="middle";
+        var tx=q.x+(q.x<W/2?-14:14)*q.f, tw=ctx.measureText(n.n).width;
+        ctx.fillStyle=colors.paper;ctx.globalAlpha*=.8;ctx.fillRect(q.x<W/2?tx-tw-4:tx-4,q.y-10*q.f,tw+8,20*q.f);
+        ctx.globalAlpha=Math.max(.35,Math.min(1,1.15-q.z*.6));ctx.fillStyle=colors.ink;ctx.fillText(n.n,tx,q.y);ctx.globalAlpha=1;
+      }
+    });
+  }
+  var last=0, spawnT=0, visible=true;
+  function tick(ts){
+    var dt=Math.min(50,ts-(last||ts)); last=ts;
+    if(!drag) yaw+=vYaw*dt/16;
+    if(!reduced){
+      spawnT+=dt; if(spawnT>650 && msgs.length<9){spawn();spawnT=0}
+      msgs=msgs.filter(function(m){m.t+=m.sp*dt/16; if(m.t>=1){m.t=0;m.seg++; if(m.seg>=m.r.length-1){count++;$("#figMsgs").textContent=count+(count===1?" message":" messages")+" delivered";return false}} return true});
+    }
+    draw();
+    if(visible) requestAnimationFrame(tick);
+  }
+  readColors(); size();
+  new ResizeObserver(function(){size();draw()}).observe(cv);
+  new IntersectionObserver(function(en){var v=en[0].isIntersecting; if(v&&!visible){visible=true;last=0;requestAnimationFrame(tick)} visible=v}).observe(cv);
+  requestAnimationFrame(tick);
+  cv.addEventListener("pointerdown",function(e){drag={x:e.clientX,y:e.clientY,yaw:yaw,pitch:pitch};cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener("pointermove",function(e){if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;pitch=Math.max(-1.2,Math.min(1.2,drag.pitch+(e.clientY-drag.y)*.008));if(reduced)draw()});
+  ["pointerup","pointercancel"].forEach(function(t){cv.addEventListener(t,function(){drag=null})});
+  cv.addEventListener("keydown",function(e){
+    var k=e.key; if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].indexOf(k)<0) return; e.preventDefault();
+    if(k==="ArrowLeft")yaw-=.15; if(k==="ArrowRight")yaw+=.15; if(k==="ArrowUp")pitch=Math.max(-1.2,pitch-.12); if(k==="ArrowDown")pitch=Math.min(1.2,pitch+.12);
+    draw();
+  });
+  if(reduced) $("#figMsgs").textContent="Static view";
+
+  /* ===== iFlow monitor ===== */
+  var token=$("#token"), done=$("#done"), fnodes=[].slice.call(document.querySelectorAll("#flow .node")), sc=$("#flowScroll");
+  var steps=[[80,"Payment medium file picked up from S/4HANA Cloud"],[330,"Headers and properties set for the bank"],[490,"Mapped to the bank’s file format"],[625,"Routed to the SFTP receiver"],[850,"Delivered to bank SFTP"]];
+  var S0=80,S1=850,DUR=5200,t0=null,raf=null,started=false;
+  function setF(x,ms){
+    token.setAttribute("cx",x);done.setAttribute("x2",Math.max(140,Math.min(x,850)));
+    fnodes.forEach(function(n){n.classList.toggle("hit",+n.dataset.x<=x+1)});
+    var c=steps[0];steps.forEach(function(s){if(x>=s[0])c=s});$("#logText").textContent=c[1];
+    var fin=x>=S1-1;$("#logPill").textContent=fin?"Completed":"Processing";$("#logPill").classList.toggle("ok",fin);
+    var s=ms/1000;$("#logTime").textContent="00:"+(s<10?"0":"")+s.toFixed(3);
+  }
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+  function fr(ts){if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/DUR),x=S0+(S1-S0)*ease(p);setF(x,ts-t0);
+    if(sc.scrollWidth>sc.clientWidth+4) sc.scrollLeft=(x/980)*sc.scrollWidth-sc.clientWidth/2;
+    if(p<1)raf=requestAnimationFrame(fr)}
+  function run(){cancelAnimationFrame(raf);t0=null;if(reduced){setF(S1,DUR);return}raf=requestAnimationFrame(fr)}
+  $("#replay").addEventListener("click",run);
+  new IntersectionObserver(function(en){if(en[0].isIntersecting&&!started){started=true;run()}},{threshold:.4}).observe($("#flow"));
+
+  /* ===== Theme ===== */
+  var root=document.documentElement;
+  try{var sv=localStorage.getItem("theme");if(sv)root.dataset.theme=sv}catch(e){}
+  $("#themeBtn").addEventListener("click",toggleTheme);
+  function toggleTheme(){
+    var dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme=dark?"light":"dark";try{localStorage.setItem("theme",root.dataset.theme)}catch(e){}
+    readColors();draw();
+  }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){readColors();draw()});
+
+  /* ===== Menu ===== */
+  var mb=$("#menuBtn"),nav=$("#nav");
+  mb.addEventListener("click",function(){var o=mb.getAttribute("aria-expanded")==="true";mb.setAttribute("aria-expanded",String(!o));nav.classList.toggle("open",!o)});
+  nav.addEventListener("click",function(e){if(e.target.tagName==="A"){nav.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
+
+  /* ===== Copy email & form ===== */
+  var EMAIL="magadeshubham95@gmail.com";
+  function copyMail(){if(navigator.clipboard){navigator.clipboard.writeText(EMAIL).then(function(){say("Email copied")},function(){say(EMAIL)})}else say(EMAIL)}
+  $("#copyMail").addEventListener("click",copyMail);
+  $("#form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=$("#fName").value.trim(),m=$("#fEmail").value.trim(),s=$("#fSub").value.trim()||"Opportunity for an SAP CPI / ByDesign developer",b=$("#fMsg").value.trim();
+    if(!n||!m||!b){$("#fErr").textContent="Add your name, email and a message to continue.";return}
+    if(!/^\S+@\S+\.\S+$/.test(m)){$("#fErr").textContent="Enter an email address like name@company.com.";return}
+    $("#fErr").textContent="";
+    location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent(b+"\n\n"+n+"\n"+m);
+  });
+  $("#year").textContent=new Date().getFullYear();
+
+  /* ===== Command palette ===== */
+  var pal=$("#palDlg"),pin=$("#palIn"),plist=$("#palList"),sel=0,items=[];
+  var cvLink=document.querySelector('a[href="Shubham_CV.pdf"]');
+  var base=[
+    {l:"About",t:"Section",a:function(){location.hash="about"}},
+    {l:"Experience",t:"Section",a:function(){location.hash="experience"}},
+    {l:"Selected work",t:"Section",a:function(){location.hash="work"}},
+    {l:"Capabilities",t:"Section",a:function(){location.hash="capabilities"}},
+    {l:"Contact",t:"Section",a:function(){location.hash="contact"}}
+  ].concat(P.map(function(p){return {l:p.title,t:"Project",a:function(){openCase(p.id)}}})).concat([
+    {l:"Copy email address",t:"Action",a:copyMail},
+    {l:"Switch colour theme",t:"Action",a:toggleTheme},
+    {l:"Open LinkedIn",t:"Link",a:function(){window.open("https://www.linkedin.com/in/shubham-magade","_blank","noopener")}}
+  ]);
+  if(cvLink) base.push({l:"Download resume",t:"Link",a:function(){cvLink.click()}});
+  function render(){
+    var q=pin.value.toLowerCase().trim();
+    items=base.filter(function(i){return !q||i.l.toLowerCase().indexOf(q)>-1||i.t.toLowerCase().indexOf(q)>-1});
+    sel=Math.min(sel,Math.max(0,items.length-1));
+    plist.innerHTML=items.length?items.map(function(i,k){return '<li><button role="option" data-k="'+k+'" aria-selected="'+(k===sel)+'">'+esc(i.l)+'<small>'+i.t+'</small></button></li>'}).join(""):'<li style="padding:14px;color:var(--muted)">Nothing matches. Try “bank” or “ByDesign”.</li>';
+  }
+  function go(k){var it=items[k];if(!it)return;pal.close();setTimeout(it.a,30)}
+  function openPal(){pin.value="";sel=0;render();pal.showModal();pin.focus()}
+  $("#palBtn").addEventListener("click",openPal);
+  pin.addEventListener("input",function(){sel=0;render()});
+  pin.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(items.length-1,sel+1);render()}
+    else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(0,sel-1);render()}
+    else if(e.key==="Enter"){e.preventDefault();go(sel)}
+  });
+  plist.addEventListener("click",function(e){var b=e.target.closest("button");if(b)go(+b.dataset.k)});
+  pal.addEventListener("click",function(e){if(e.target===pal)pal.close()});
+  if(/Mac|iPhone|iPad/.test(navigator.platform)) $("#kbdHint").textContent="⌘ K";
+  document.addEventListener("keydown",function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();pal.open?pal.close():openPal()}
+  });
+})();
+</script>
+</body>
+</html>
